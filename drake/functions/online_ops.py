@@ -47,6 +47,23 @@ def send_email(reciever_address, subject, message):
     except Exception as e:
         print(e)
         return False
+    
+def get_latest_news():
+    news_headlines = []
+    res = requests.get(
+        f"https://newsapi.org/v2/top-headlines?country=in&apikey={NEWS_API_KEY}&category=general").json()
+    articles = res["articles"]
+    for article in articles:
+        news_headlines.append(article["title"])
+    return news_headlines[:5]
+    
+    
+def get_weather_report(city):
+    res = requests.get(
+        f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={OPENWEATHER_APP_ID}&units=metric").json()
+    weather = res["weather"][0]["main"]
+    temperature = res["main"]["feels_like"]
+    return weather, f"{temperature}℃", f"{feels_like}℃"
 
 def get_random_joke():
     headers = {
