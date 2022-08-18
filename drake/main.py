@@ -81,7 +81,7 @@ if __name__ == '__main__':
             
         elif 'weather' in query:
             ip_address = find_my_ip()
-            city = requests.get(f"https://iapi.co/{ip-address}/city/").text
+            city = requests.get(f"https://iapi.co/{ip_address}/city/").text
             speak(f"Getting weather report for {city}")
             weather, temperature, feels_like = get_weather_report(city)
             speak(f"The current temperature is {temperature}, but it feels like {feels_like}")
